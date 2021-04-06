@@ -1,0 +1,39 @@
+env:
+    browser: true
+overrides:
+    - files:
+        - "*.ts"
+        - "*.tsx"
+      env:
+        es6: true
+      extends:
+        - eslint:recommended
+        - plugin:@typescript-eslint/eslint-recommended
+        - plugin:@typescript-eslint/recommended
+        - plugin:@typescript-eslint/recommended-requiring-type-checking
+        - prettier
+      parser: "@typescript-eslint/parser"
+      parserOptions:
+        ecmaVersion: 2018
+        project: tsconfig.json
+        sourceType: module
+      rules:
+        "@typescript-eslint/no-unused-vars":
+          - error
+          - args: all
+            argsIgnorePattern: ^_
+      settings:
+        react:
+          pragma: React
+          version: latest
+    - files:
+        - "*.tsx"
+      extends:
+        - plugin:react/recommended
+        - plugin:react-hooks/recommended
+      rules:
+        "@typescript-eslint/member-delimiter-style":
+          - error
+          - singleline:
+              delimiter: semi
+              requireLast: false

@@ -1,0 +1,55 @@
+{
+	"author": "sparrowhawk-ea",
+	"bugs": {
+		"url": "https://github.com/sparrowhawk-ea/fmmp-react/issues"
+	},
+	"description": "Form Minimap React",
+	"devDependencies": {
+		"@fmmp/core": "^1.0.0",
+		"@types/react": "^17.0.3",
+		"@typescript-eslint/eslint-plugin": "^4.16.1",
+		"@typescript-eslint/parser": "^4.16.1",
+		"eslint": "^7.21.0",
+		"eslint-config-prettier": "^8.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-react": "^7.22.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
+		"prettier": "^2.2.1",
+		"react": "^17.0.1",
+		"tslib": "^2.1.0",
+		"typescript": "^4.2.3"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"homepage": "https://github.com/sparrowhawk-ea/fmmp-react#readme",
+	"keywords": [
+		"Form",
+		"Minimap",
+		"React"
+	],
+	"license": "MIT",
+	"main": "dist/index.js",
+	"name": "@fmmp/react",
+	"peerDependencies": {
+		"@fmmp/core": "^1.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sparrowhawk-ea/fmmp-react.git"
+	},
+	"scripts": {
+		"build": "tsc",
+		"format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+		"lint": "eslint --report-unused-disable-directives --ext .ts,.tsx .",
+		"postversion": "git push && git push --tags",
+		"prebuild": "rm -rf dist",
+		"prepare": "npm run build",
+		"prepublishOnly": "npm run lint",
+		"preversion": "npm run lint",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"version": "npm run format && git add -A src"
+	},
+	"types": "dist/index.d.ts",
+	"version": "1.0.0"
+}
