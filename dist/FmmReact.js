@@ -8,7 +8,7 @@ var core_1 = require("@fmmp/core");
 //						F M M R E A C T M I N I M A P T
 // =================================================================================================================================
 var FmmReactMinimapFn = function (_a, ref) {
-    var aggregateLabels = _a.aggregateLabels, anchor = _a.anchor, children = _a.children, customWidgetIds = _a.customWidgetIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, page = _a.page, panel = _a.panel, store = _a.store, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, widgetFactories = _a.widgetFactories;
+    var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customWidgetIds = _a.customWidgetIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, widgetFactories = _a.widgetFactories;
     if (children)
         throw new Error('FmmReactMinimapT is a contentless tag');
     var thisForm = react_1.default.useRef();
@@ -22,15 +22,15 @@ var FmmReactMinimapFn = function (_a, ref) {
     };
     var p = {
         aggregateLabels: aggregateLabels,
-        anchor: anchor,
+        anchorRef: anchorRef,
         customWidgetIds: customWidgetIds,
         debounceMsec: debounceMsec,
         dynamicLabels: dynamicLabels,
         framework: framework,
         onUpdate: onUpdate,
-        page: page,
-        panel: panel,
-        store: store,
+        pageRef: pageRef,
+        panelRef: panelRef,
+        storeRef: storeRef,
         title: title,
         usePanelDetail: usePanelDetail,
         useWidthToScale: useWidthToScale,
@@ -42,11 +42,11 @@ var FmmReactMinimapFn = function (_a, ref) {
 };
 exports.FmmReactMinimapT = react_1.default.forwardRef(FmmReactMinimapFn);
 var FmmReactPanelFn = function (_a, ref) {
-    var children = _a.children, refDetailParent = _a.refDetailParent, _b = _a.vertical, vertical = _b === void 0 ? false : _b;
+    var children = _a.children, detailParentRef = _a.detailParentRef, _b = _a.vertical, vertical = _b === void 0 ? false : _b;
     if (children)
         throw new Error('FmmReactPanelT is a contentless tag');
     var thisHost = react_1.default.useRef();
-    exports.useSetRef(ref, exports.useFmmReactPanel(thisHost, refDetailParent, vertical));
+    exports.useSetRef(ref, exports.useFmmReactPanel(thisHost, detailParentRef, vertical));
     return (react_1.default.createElement("div", { className: 'fmm-panel', ref: thisHost },
         react_1.default.createElement("style", null, core_1.Fmm.CSS)));
 };
@@ -69,21 +69,21 @@ var useFmmReactMinimap = function (key, form, p) {
         var _a, _b, _c, _d;
         var fmcp = {
             aggregateLabels: p.aggregateLabels,
-            anchor: (_a = p.anchor) === null || _a === void 0 ? void 0 : _a.current,
+            anchor: (_a = p.anchorRef) === null || _a === void 0 ? void 0 : _a.current,
             debounceMsec: p.debounceMsec,
             dynamicLabels: p.dynamicLabels,
             form: form.current,
             framework: p.framework,
             onUpdate: p.onUpdate,
-            page: (_b = p.page) === null || _b === void 0 ? void 0 : _b.current,
-            store: (_c = p.store) === null || _c === void 0 ? void 0 : _c.current,
+            page: (_b = p.pageRef) === null || _b === void 0 ? void 0 : _b.current,
+            store: (_c = p.storeRef) === null || _c === void 0 ? void 0 : _c.current,
             title: p.title,
             usePanelDetail: p.usePanelDetail,
             useWidthToScale: p.useWidthToScale,
             verbosity: p.verbosity,
             widgetFactories: p.widgetFactories
         };
-        var panelX = ((_d = p.panel) === null || _d === void 0 ? void 0 : _d.current) ? G.PANELS.get(p.panel.current) : undefined;
+        var panelX = ((_d = p.panelRef) === null || _d === void 0 ? void 0 : _d.current) ? G.PANELS.get(p.panelRef.current) : undefined;
         thisFmm.current = panelX === null || panelX === void 0 ? void 0 : panelX.createMinimap(fmcp);
         if (!thisFmm.current)
             return undefined;
@@ -116,10 +116,10 @@ exports.useFmmReactMinimap = useFmmReactMinimap;
 // =================================================================================================================================
 //						U S E F M M R E A C T P A N E L
 // =================================================================================================================================
-var useFmmReactPanel = function (host, detailParent, vertical) {
+var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
     var thisPanel = react_1.default.useRef();
     exports.useOnceAfterFirstRender(function () {
-        var panel = core_1.Fmm.createPanel(undefined, host.current, detailParent.current, vertical);
+        var panel = core_1.Fmm.createPanel(undefined, hostRef.current, detailParentRef.current, vertical);
         thisPanel.current = {
             destroyDetached: function () { return panel.destroyDetached(); }
         };
