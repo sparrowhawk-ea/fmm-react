@@ -3,6 +3,60 @@ React components and hooks for [Form Minimap](https://github.com/sparrowhawk-ea/
 Please consult that documentation for further information on the concepts mentioned below.
 
 ***
+# Getting Started
+## Installation
+```bash
+npm install --save @fmmp/react
+```
+
+## Adding Form Minimap
+Before
+```jsx
+    function App() {
+        return (
+            <div className="App">
+                <form>
+                    <input id="Input1"/><br/>
+                    <input id="Input2"/><br/>
+                    <input id="Input3"/><br/>
+                    <input id="Input4"/>
+                </form>
+            </div>
+        );
+    }
+
+    export default App;
+```
+After
+```jsx
+    import React from 'react';
+    import { FmmReactMinimapT, FmmReactPanelT } from '@fmmp/react';
+
+    function App() {
+        var anchorRef = React.useRef();
+        var panelRef = React.useRef();
+        var css = '.fmm-frame { height: 50px; } .fmm-panel { height: 0; }';
+        return (
+            <div className="App">
+                <style>{css}</style>
+                <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
+                <FmmReactPanelT ref={panelRef}/>
+                <form>
+                    <FmmReactMinimapT anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
+                    <input id="Input1"/><br/>
+                    <input id="Input2"/><br/>
+                    <input id="Input3"/><br/>
+                    <input id="Input4"/>
+                </form>
+            </div>
+        );
+    }
+
+    export default App;
+```
+
+***
+# API
 ## FmmReactMinimap
 Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmmp-core#fmmminimap) returned from [FmmReactMinimapT](#fmmreactminimapt) or [useFmmReactMinimap](#usefmmreactminimap).
 
@@ -58,7 +112,7 @@ Component to create and manage a [FmmReactPanel](#fmmreactpanel).
 
 Property | Type | Required
 --- | --- | :---:
-[detailParentRef](https://github.com/sparrowhawk-ea/fmmp-core#pcp-detailparent) | React.RefObject\<HTMLDivElement\> | &check;
+[detailParentRef](https://github.com/sparrowhawk-ea/fmmp-core#pcp-detailparent) | React.RefObject\<HTMLDivElement\>
 [vertical](https://github.com/sparrowhawk-ea/fmmp-core#pcp-vertical) | boolean
 
 ***
@@ -68,7 +122,7 @@ Hook version of [FmmReactPanelT](#fmmreactpanelt) that returns a [FmmReactPanel]
 Parameter | Type | Required
 --- | --- | :---:
 [hostRef](https://github.com/sparrowhawk-ea/fmmp-core#fmmcreatepanel) | string | &check;
-[detailParentRef](https://github.com/sparrowhawk-ea/fmmp-core#fmmcreatepanel) | React.RefObject\<HTMLDivElement\> | &check;
+[detailParentRef](https://github.com/sparrowhawk-ea/fmmp-core#fmmcreatepanel) | React.RefObject\<HTMLDivElement\>
 [vertical](https://github.com/sparrowhawk-ea/fmmp-core#fmmcreatepanel) | boolean
 
 ***

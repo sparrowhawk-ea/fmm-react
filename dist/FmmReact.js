@@ -119,7 +119,7 @@ exports.useFmmReactMinimap = useFmmReactMinimap;
 var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
     var thisPanel = react_1.default.useRef();
     exports.useOnceAfterFirstRender(function () {
-        var panel = core_1.Fmm.createPanel(undefined, hostRef.current, detailParentRef.current, vertical);
+        var panel = core_1.Fmm.createPanel(undefined, hostRef.current, detailParentRef === null || detailParentRef === void 0 ? void 0 : detailParentRef.current, vertical);
         thisPanel.current = {
             destroyDetached: function () { return panel.destroyDetached(); }
         };

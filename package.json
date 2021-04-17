@@ -5,7 +5,6 @@
 	},
 	"description": "Form Minimap React",
 	"devDependencies": {
-		"@fmmp/core": "^1.0.0",
 		"@types/react": "^17.0.3",
 		"@typescript-eslint/eslint-plugin": "^4.16.1",
 		"@typescript-eslint/parser": "^4.16.1",
@@ -32,7 +31,7 @@
 	"main": "dist/index.js",
 	"name": "@fmmp/react",
 	"peerDependencies": {
-		"@fmmp/core": "^1.0.0"
+		"@fmmp/core": "^1.0.1"
 	},
 	"repository": {
 		"type": "git",
@@ -51,5 +50,5 @@
 		"version": "npm run format && git add -A src"
 	},
 	"types": "dist/index.d.ts",
-	"version": "2.0.0"
+	"version": "2.0.1"
 }

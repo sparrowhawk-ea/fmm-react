@@ -108,7 +108,7 @@ export interface FmmReactPanel {
 //						F M M R E A C T P A N E L T
 // =================================================================================================================================
 interface FmmReactPanelProps {
-	detailParentRef: React.RefObject<HTMLDivElement>;
+	detailParentRef?: React.RefObject<HTMLDivElement>;
 	vertical?: boolean;
 }
 const FmmReactPanelFn: React.ForwardRefRenderFunction<FmmReactPanel, FmmReactPanelProps> = (
@@ -197,12 +197,12 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 // =================================================================================================================================
 export const useFmmReactPanel = (
 	hostRef: React.RefObject<HTMLDivElement>,
-	detailParentRef: React.RefObject<HTMLDivElement>,
+	detailParentRef?: React.RefObject<HTMLDivElement>,
 	vertical?: boolean
 ): React.RefObject<FmmReactPanel> => {
 	const thisPanel = React.useRef<FmmReactPanel>();
 	useOnceAfterFirstRender(() => {
-		const panel = Fmm.createPanel(undefined, hostRef.current, detailParentRef.current, vertical);
+		const panel = Fmm.createPanel(undefined, hostRef.current, detailParentRef?.current, vertical);
 		thisPanel.current = {
 			destroyDetached: () => panel.destroyDetached()
 		};
