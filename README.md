@@ -30,7 +30,7 @@ Before
 After
 ```jsx
     import React from 'react';
-    import { FmmReactMinimapT, FmmReactPanelT } from '@fmm/react';
+    import { FmmReactMinimapT, FmmReactPanelT } from '@eafmm/react';
 
     function App() {
         var anchorRef = React.useRef();
