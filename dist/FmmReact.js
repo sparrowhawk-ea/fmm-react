@@ -1,9 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useSetRef = exports.useOnceAfterFirstRender = exports.useFmmReactStore = exports.useFmmReactPanel = exports.useFmmReactMinimap = exports.FmmReactStoreT = exports.FmmReactPanelT = exports.FmmReactMinimapT = void 0;
-var tslib_1 = require("tslib");
-var react_1 = tslib_1.__importDefault(require("react"));
-var core_1 = require("@fmmp/core");
+import React from 'react';
+import { Fmm, FmmMapStore } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M R E A C T M I N I M A P T
 // =================================================================================================================================
@@ -11,7 +7,7 @@ var FmmReactMinimapFn = function (_a, ref) {
     var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customWidgetIds = _a.customWidgetIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, widgetFactories = _a.widgetFactories;
     if (children)
         throw new Error('FmmReactMinimapT is a contentless tag');
-    var thisForm = react_1.default.useRef();
+    var thisForm = React.useRef();
     var setFormRef = function (e) {
         var form = e === null || e === void 0 ? void 0 : e.parentElement;
         while (form && form.tagName !== 'FORM')
@@ -37,34 +33,34 @@ var FmmReactMinimapFn = function (_a, ref) {
         verbosity: verbosity,
         widgetFactories: widgetFactories
     };
-    exports.useSetRef(ref, exports.useFmmReactMinimap('', thisForm, p));
-    return react_1.default.createElement("div", { ref: setFormRef }); // avoid using form element tag to keep out of the way of any form processing library
+    useSetRef(ref, useFmmReactMinimap('', thisForm, p));
+    return React.createElement("div", { ref: setFormRef }); // avoid using form element tag to keep out of the way of any form processing library
 };
-exports.FmmReactMinimapT = react_1.default.forwardRef(FmmReactMinimapFn);
+export var FmmReactMinimapT = React.forwardRef(FmmReactMinimapFn);
 var FmmReactPanelFn = function (_a, ref) {
     var children = _a.children, detailParentRef = _a.detailParentRef, _b = _a.vertical, vertical = _b === void 0 ? false : _b;
     if (children)
         throw new Error('FmmReactPanelT is a contentless tag');
-    var thisHost = react_1.default.useRef();
-    exports.useSetRef(ref, exports.useFmmReactPanel(thisHost, detailParentRef, vertical));
-    return (react_1.default.createElement("div", { className: 'fmm-panel', ref: thisHost },
-        react_1.default.createElement("style", null, core_1.Fmm.CSS)));
+    var thisHost = React.useRef();
+    useSetRef(ref, useFmmReactPanel(thisHost, detailParentRef, vertical));
+    return (React.createElement("div", { className: 'fmm-panel', ref: thisHost },
+        React.createElement("style", null, Fmm.CSS)));
 };
-exports.FmmReactPanelT = react_1.default.forwardRef(FmmReactPanelFn);
+export var FmmReactPanelT = React.forwardRef(FmmReactPanelFn);
 var FmmReactStoreFn = function (_a, ref) {
     var children = _a.children, errors = _a.errors, values = _a.values;
     if (children)
         throw new Error('FmmReactStoreT is a contentless tag');
-    exports.useSetRef(ref, exports.useFmmReactStore(values, errors));
+    useSetRef(ref, useFmmReactStore(values, errors));
     return null;
 };
-exports.FmmReactStoreT = react_1.default.forwardRef(FmmReactStoreFn);
+export var FmmReactStoreT = React.forwardRef(FmmReactStoreFn);
 // =================================================================================================================================
 //						U S E F M M R E A C T M I N I M A P
 // =================================================================================================================================
-var useFmmReactMinimap = function (key, form, p) {
-    var thisFmm = react_1.default.useRef();
-    var thisMinimap = react_1.default.useRef();
+export var useFmmReactMinimap = function (key, form, p) {
+    var thisFmm = React.useRef();
+    var thisMinimap = React.useRef();
     var createMinimap = function () {
         var _a, _b, _c, _d;
         var fmcp = {
@@ -97,14 +93,14 @@ var useFmmReactMinimap = function (key, form, p) {
             thisFmm.current = undefined;
         };
     };
-    exports.useOnceAfterFirstRender(createMinimap);
-    react_1.default.useEffect(function () {
+    useOnceAfterFirstRender(createMinimap);
+    React.useEffect(function () {
         if (thisFmm.current)
             thisFmm.current.destructor();
         thisMinimap.current = thisFmm.current = undefined;
         return createMinimap();
     }, [key]);
-    react_1.default.useEffect(function () {
+    React.useEffect(function () {
         if (thisFmm.current)
             thisFmm.current.compose(p.customWidgetIds);
     }, [p.customWidgetIds, key, thisFmm]);
@@ -112,14 +108,13 @@ var useFmmReactMinimap = function (key, form, p) {
         thisFmm.current.takeSnapshot();
     return thisMinimap;
 };
-exports.useFmmReactMinimap = useFmmReactMinimap;
 // =================================================================================================================================
 //						U S E F M M R E A C T P A N E L
 // =================================================================================================================================
-var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
-    var thisPanel = react_1.default.useRef();
-    exports.useOnceAfterFirstRender(function () {
-        var panel = core_1.Fmm.createPanel(undefined, hostRef.current, detailParentRef === null || detailParentRef === void 0 ? void 0 : detailParentRef.current, vertical);
+export var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
+    var thisPanel = React.useRef();
+    useOnceAfterFirstRender(function () {
+        var panel = Fmm.createPanel(undefined, hostRef.current, detailParentRef === null || detailParentRef === void 0 ? void 0 : detailParentRef.current, vertical);
         thisPanel.current = {
             destroyDetached: function () { return panel.destroyDetached(); }
         };
@@ -131,36 +126,32 @@ var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
     });
     return thisPanel;
 };
-exports.useFmmReactPanel = useFmmReactPanel;
 // =================================================================================================================================
 //						U S E F M M R E A C T S T O R E
 // =================================================================================================================================
-var useFmmReactStore = function (values, errors) {
-    var thisStore = react_1.default.useRef(new core_1.FmmMapStore(values, errors));
+export var useFmmReactStore = function (values, errors) {
+    var thisStore = React.useRef(new FmmMapStore(values, errors));
     thisStore.current.update(values, errors);
     return thisStore;
 };
-exports.useFmmReactStore = useFmmReactStore;
 // =================================================================================================================================
 //						U S E O N C E A F T E R F I R S T R E N D E R
 // =================================================================================================================================
-var useOnceAfterFirstRender = function (fn) {
+export var useOnceAfterFirstRender = function (fn) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return react_1.default.useEffect(fn, []);
+    return React.useEffect(fn, []);
 };
-exports.useOnceAfterFirstRender = useOnceAfterFirstRender;
 // =================================================================================================================================
 //						U S E S E T R E F
 // =================================================================================================================================
-var useSetRef = function (ref, value) {
-    return react_1.default.useEffect(function () {
+export var useSetRef = function (ref, value) {
+    return React.useEffect(function () {
         if (typeof ref === 'function')
             ref(value.current);
         else if (ref)
             ref.current = value.current;
     }, [ref, value]);
 };
-exports.useSetRef = useSetRef;
 // =================================================================================================================================
 // =================================================================================================================================
 // =================================================	P R I V A T E	============================================================

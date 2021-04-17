@@ -6,7 +6,7 @@
 		"isolatedModules": true,
 		"jsx": "react",
 		"lib": ["es2018", "dom"],
-		"module": "commonjs",
+		"module": "es2020",
 		"moduleResolution": "node",
 		"outDir": "./dist",
 		"strict": true,

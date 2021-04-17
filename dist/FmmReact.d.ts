@@ -1,5 +1,5 @@
 import React from 'react';
-import { FmmFramework, FmmMapErrors, FmmMapString, FmmMapValues, FmmOnUpdate, FmmStore, FmmWidgetFactory } from '@fmmp/core';
+import { FmmFramework, FmmMapErrors, FmmMapString, FmmMapValues, FmmOnUpdate, FmmStore, FmmWidgetFactory } from '@eafmm/core';
 export interface FmmReactMinimap {
     destructor(): void;
     takeSnapshot(): boolean;
