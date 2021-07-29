@@ -33,7 +33,8 @@ export interface FmmReactMinimapProps {
 	readonly framework?: FmmFramework;
 	readonly onUpdate?: FmmOnUpdate;
 	readonly pageRef?: React.RefObject<HTMLElement>;
-	readonly panelRef: React.RefObject<FmmReactPanel>;
+	readonly panelRef?: React.RefObject<FmmReactPanel>;
+	readonly parentRef?: React.RefObject<HTMLElement>;
 	readonly storeRef?: React.RefObject<FmmStore>;
 	readonly title: string;
 	readonly usePanelDetail?: boolean;
@@ -44,7 +45,7 @@ export interface FmmReactMinimapProps {
 }
 
 // =================================================================================================================================
-//						F M M R E A C T M I N I M A P T
+//						F M M R E A C T M I N I M A P T A G
 // =================================================================================================================================
 const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReactMinimapProps> = (
 	{
@@ -58,6 +59,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		onUpdate,
 		pageRef,
 		panelRef,
+		parentRef,
 		storeRef,
 		title,
 		usePanelDetail,
@@ -67,12 +69,12 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 	}: React.PropsWithChildren<FmmReactMinimapProps>,
 	ref
 ) => {
-	if (children) throw new Error('FmmReactMinimapT is a contentless tag');
+	if (children) throw new Error('FmmReactMinimapTag is a contentless tag');
 	const thisForm = React.useRef<HTMLFormElement>();
 	const setFormRef = (e: HTMLDivElement) => {
 		let form = e?.parentElement;
 		while (form && form.tagName !== 'FORM') form = form.parentElement;
-		if (e && !form) throw new Error('FmmReactMinimapT must be used inside a FORM tag');
+		if (e && !form) throw new Error('FmmReactMinimapTag must be used inside a FORM tag');
 		thisForm.current = form as HTMLFormElement;
 	};
 	const p: FmmReactMinimapProps = {
@@ -85,6 +87,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		onUpdate,
 		pageRef,
 		panelRef,
+		parentRef,
 		storeRef,
 		title,
 		usePanelDetail,
@@ -95,7 +98,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 	useSetRef(ref, useFmmReactMinimap('', thisForm, p));
 	return <div ref={setFormRef}></div>; // avoid using form element tag to keep out of the way of any form processing library
 };
-export const FmmReactMinimapT = React.forwardRef(FmmReactMinimapFn);
+export const FmmReactMinimapTag = React.forwardRef(FmmReactMinimapFn);
 
 // =================================================================================================================================
 //						F M M R E A C T P A N E L
@@ -105,7 +108,7 @@ export interface FmmReactPanel {
 }
 
 // =================================================================================================================================
-//						F M M R E A C T P A N E L T
+//						F M M R E A C T P A N E L T A G
 // =================================================================================================================================
 interface FmmReactPanelProps {
 	detailParentRef?: React.RefObject<HTMLDivElement>;
@@ -115,7 +118,7 @@ const FmmReactPanelFn: React.ForwardRefRenderFunction<FmmReactPanel, FmmReactPan
 	{ children, detailParentRef, vertical = false }: React.PropsWithChildren<FmmReactPanelProps>,
 	ref
 ) => {
-	if (children) throw new Error('FmmReactPanelT is a contentless tag');
+	if (children) throw new Error('FmmReactPanelTag is a contentless tag');
 	const thisHost = React.useRef<HTMLDivElement>();
 	useSetRef(ref, useFmmReactPanel(thisHost, detailParentRef, vertical));
 	return (
@@ -124,10 +127,10 @@ const FmmReactPanelFn: React.ForwardRefRenderFunction<FmmReactPanel, FmmReactPan
 		</div>
 	);
 };
-export const FmmReactPanelT = React.forwardRef(FmmReactPanelFn);
+export const FmmReactPanelTag = React.forwardRef(FmmReactPanelFn);
 
 // =================================================================================================================================
-//						F M M R E A C T S T O R E T
+//						F M M R E A C T S T O R E T A G
 // =================================================================================================================================
 interface FmmReactStoreProps {
 	errors?: FmmMapErrors;
@@ -137,11 +140,11 @@ const FmmReactStoreFn: React.ForwardRefRenderFunction<FmmStore, FmmReactStorePro
 	{ children, errors, values }: React.PropsWithChildren<FmmReactStoreProps>,
 	ref
 ) => {
-	if (children) throw new Error('FmmReactStoreT is a contentless tag');
+	if (children) throw new Error('FmmReactStoreTag is a contentless tag');
 	useSetRef(ref, useFmmReactStore(values, errors));
 	return null;
 };
-export const FmmReactStoreT = React.forwardRef(FmmReactStoreFn);
+export const FmmReactStoreTag = React.forwardRef(FmmReactStoreFn);
 
 // =================================================================================================================================
 //						U S E F M M R E A C T M I N I M A P
@@ -168,7 +171,7 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 			widgetFactories: p.widgetFactories
 		};
 		const panelX = p.panelRef?.current ? G.PANELS.get(p.panelRef.current) : undefined;
-		thisFmm.current = panelX?.createMinimap(fmcp);
+		thisFmm.current = panelX? panelX.createMinimap(fmcp): Fmm.createMinimap(fmcp, p.parentRef?.current);
 		if (!thisFmm.current) return undefined;
 		thisMinimap.current = {
 			destructor: () => thisFmm.current?.destructor(),
@@ -202,7 +205,7 @@ export const useFmmReactPanel = (
 ): React.RefObject<FmmReactPanel> => {
 	const thisPanel = React.useRef<FmmReactPanel>();
 	useOnceAfterFirstRender(() => {
-		const panel = Fmm.createPanel(undefined, hostRef.current, detailParentRef?.current, vertical);
+		const panel = Fmm.createPanel(hostRef.current, detailParentRef?.current, vertical, undefined);
 		thisPanel.current = {
 			destroyDetached: () => panel.destroyDetached()
 		};

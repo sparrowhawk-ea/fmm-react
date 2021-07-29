@@ -5,18 +5,18 @@
 	},
 	"description": "Form Minimap React",
 	"devDependencies": {
-		"@types/react": "^17.0.14",
-		"@typescript-eslint/eslint-plugin": "^4.28.3",
-		"@typescript-eslint/parser": "^4.28.3",
-		"eslint": "^7.30.0",
-		"eslint-config-prettier": "^8.3.0",
-		"eslint-plugin-prettier": "^3.4.0",
-		"eslint-plugin-react": "^7.24.0",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"prettier": "^2.3.2",
-		"react": "^17.0.2",
-		"tslib": "^2.3.0",
-		"typescript": "^4.3.5"
+		"@types/react": "17",
+		"@typescript-eslint/eslint-plugin": "*",
+		"@typescript-eslint/parser": "*",
+		"eslint": "*",
+		"eslint-config-prettier": "*",
+		"eslint-plugin-prettier": "*",
+		"eslint-plugin-react": "7",
+		"eslint-plugin-react-hooks": "4",
+		"prettier": "*",
+		"react": "17",
+		"tslib": "*",
+		"typescript": "*"
 	},
 	"files": [
 		"dist/**/*"
@@ -31,7 +31,7 @@
 	"main": "dist/index.js",
 	"name": "@eafmm/react",
 	"peerDependencies": {
-		"@eafmm/core": "^1.0.0"
+		"@eafmm/core": "2"
 	},
 	"repository": {
 		"type": "git",
@@ -50,5 +50,5 @@
 		"version": "npm run format && git add -A src"
 	},
 	"types": "dist/index.d.ts",
-	"version": "1.0.0"
+	"version": "2.0.1"
 }

@@ -12,7 +12,8 @@ export interface FmmReactMinimapProps {
     readonly framework?: FmmFramework;
     readonly onUpdate?: FmmOnUpdate;
     readonly pageRef?: React.RefObject<HTMLElement>;
-    readonly panelRef: React.RefObject<FmmReactPanel>;
+    readonly panelRef?: React.RefObject<FmmReactPanel>;
+    readonly parentRef?: React.RefObject<HTMLElement>;
     readonly storeRef?: React.RefObject<FmmStore>;
     readonly title: string;
     readonly usePanelDetail?: boolean;
@@ -21,7 +22,7 @@ export interface FmmReactMinimapProps {
     readonly widgetFactories?: FmmWidgetFactory[];
     customWidgetIds?: string[];
 }
-export declare const FmmReactMinimapT: React.ForwardRefExoticComponent<FmmReactMinimapProps & React.RefAttributes<FmmReactMinimap>>;
+export declare const FmmReactMinimapTag: React.ForwardRefExoticComponent<FmmReactMinimapProps & React.RefAttributes<FmmReactMinimap>>;
 export interface FmmReactPanel {
     destroyDetached(): void;
 }
@@ -29,12 +30,12 @@ interface FmmReactPanelProps {
     detailParentRef?: React.RefObject<HTMLDivElement>;
     vertical?: boolean;
 }
-export declare const FmmReactPanelT: React.ForwardRefExoticComponent<FmmReactPanelProps & React.RefAttributes<FmmReactPanel>>;
+export declare const FmmReactPanelTag: React.ForwardRefExoticComponent<FmmReactPanelProps & React.RefAttributes<FmmReactPanel>>;
 interface FmmReactStoreProps {
     errors?: FmmMapErrors;
     values: FmmMapValues;
 }
-export declare const FmmReactStoreT: React.ForwardRefExoticComponent<FmmReactStoreProps & React.RefAttributes<FmmStore>>;
+export declare const FmmReactStoreTag: React.ForwardRefExoticComponent<FmmReactStoreProps & React.RefAttributes<FmmStore>>;
 export declare const useFmmReactMinimap: (key: string, form: React.RefObject<HTMLFormElement>, p: FmmReactMinimapProps) => React.RefObject<FmmReactMinimap>;
 export declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, detailParentRef?: React.RefObject<HTMLDivElement>, vertical?: boolean) => React.RefObject<FmmReactPanel>;
 export declare const useFmmReactStore: <TV extends FmmMapValues, TE extends FmmMapErrors>(values: TV, errors?: TE) => React.RefObject<FmmStore>;

@@ -27,10 +27,35 @@ Before
 
     export default App;
 ```
-After
+After without panel
 ```jsx
     import React from 'react';
-    import { FmmReactMinimapT, FmmReactPanelT } from '@eafmm/react';
+    import { FmmReactMinimapTag } from '@eafmm/react';
+
+    function App() {
+        var parentRef = React.useRef();
+        var css = '.fmm-frame { height: 50px; }';
+        return (
+            <div className="App">
+                <style>{css}</style>
+                <div ref={parentRef} style={{width:'70px', height:'50px', marginLeft:'200px'}}></div>
+                <form>
+                    <FmmReactMinimapTag parentRef={parentRef} title='Title'/>
+                    <input id="Input1"/><br/>
+                    <input id="Input2"/><br/>
+                    <input id="Input3"/><br/>
+                    <input id="Input4"/>
+                </form>
+            </div>
+        );
+    }
+
+    export default App;
+```
+After with panel
+```jsx
+    import React from 'react';
+    import { FmmReactMinimapTag, FmmReactPanelTag } from '@eafmm/react';
 
     function App() {
         var anchorRef = React.useRef();
@@ -40,9 +65,9 @@ After
             <div className="App">
                 <style>{css}</style>
                 <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
-                <FmmReactPanelT ref={panelRef}/>
+                <FmmReactPanelTag ref={panelRef}/>
                 <form>
-                    <FmmReactMinimapT anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
+                    <FmmReactMinimapTag anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
                     <input id="Input1"/><br/>
                     <input id="Input2"/><br/>
                     <input id="Input3"/><br/>
@@ -69,6 +94,7 @@ Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap) 
 ## FmmReactMinimapT
 Component to create and manage a [FmmReactMinimap](#fmmreactminimap).
 The minimap is detached when this component is destroyed.
+For minimaps in a panel, use the panelRef property; otherwise use the parentRef property to show an always-visible minimap, or anchorRef for a popup minimap.
 
 Property | Type | Required
 --- | --- | :---:
@@ -80,7 +106,8 @@ Property | Type | Required
 [framework](https://github.com/sparrowhawk-ea/fmm-core#mcp-framework) | [FmmFramework](https://github.com/sparrowhawk-ea/fmm-core#fmmframework)
 [onUpdate](https://github.com/sparrowhawk-ea/fmm-core#mcp-onupdate) | [FmmOnUpdate](https://github.com/sparrowhawk-ea/fmm-core#fmmonupdate)
 [pageRef](https://github.com/sparrowhawk-ea/fmm-core#mcp-page) | React.RefObject\<HTMLElement\>
-panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\> | &check;
+panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
+[parentRef](https://github.com/sparrowhawk-ea/fmm-core#pcm-parent) | React.RefObject\<HTMLElement\>
 [storeRef](https://github.com/sparrowhawk-ea/fmm-core#mcp-store) | React.RefObject\<[FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore)\>
 [title](https://github.com/sparrowhawk-ea/fmm-core#mcp-title) | string | &check;
 [usePanelDetail](https://github.com/sparrowhawk-ea/fmm-core#mcp-usepaneldetail) | boolean
