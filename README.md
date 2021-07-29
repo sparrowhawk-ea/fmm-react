@@ -83,7 +83,7 @@ After with panel
 ***
 # API
 ## FmmReactMinimap
-Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap) returned from [FmmReactMinimapT](#fmmreactminimapt) or [useFmmReactMinimap](#usefmmreactminimap).
+Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap) returned from [FmmReactMinimapTag](#fmmreactminimaptag) or [useFmmReactMinimap](#usefmmreactminimap).
 
 | Method
 | ---
@@ -91,7 +91,7 @@ Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap) 
 | [takeSnapshot](https://github.com/sparrowhawk-ea/fmm-core#mm-takesnapshot)
 
 ***
-## FmmReactMinimapT
+## FmmReactMinimapTag
 Component to create and manage a [FmmReactMinimap](#fmmreactminimap).
 The minimap is detached when this component is destroyed.
 For minimaps in a panel, use the panelRef property; otherwise use the parentRef property to show an always-visible minimap, or anchorRef for a popup minimap.
@@ -117,24 +117,24 @@ panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
 
 ***
 ## useFmmReactMinimap
-Hook version of [FmmReactMinimapT](#fmmreactminimapt) that returns a [FmmReactMinimap](#fmmreactminimap).
+Hook version of [FmmReactMinimapTag](#fmmreactminimaptag) that returns a [FmmReactMinimap](#fmmreactminimap).
 
 Parameter | Type | Required | Description
 --- | --- | :---: | ---
 key | string | &check; | Minimap is recreated when key changes.  Any previous minimap is detached.
 [form](https://github.com/sparrowhawk-ea/fmm-core#fmmminimapcreateparam) | React.RefObject\<HTMLFormElement\> | &check;
-p | FmmReactMinimapProps | &check; | Object with properties of [FmmReactMinimapT](#fmmreactminimapt).
+p | FmmReactMinimapProps | &check; | Object with properties of [FmmReactMinimapTag](#fmmreactminimaptag).
 
 ***
 ## FmmReactPanel
-Adapter for [FmmPanel](https://github.com/sparrowhawk-ea/fmm-core#fmmpanel) returned from [FmmReactPanelT](#fmmreactpanelt) or [useFmmReactPanel](#usefmmreactpanel).
+Adapter for [FmmPanel](https://github.com/sparrowhawk-ea/fmm-core#fmmpanel) returned from [FmmReactPanelTag](#fmmreactpaneltag) or [useFmmReactPanel](#usefmmreactpanel).
 
 | Method
 | ---
 | [destroyDetached](https://github.com/sparrowhawk-ea/fmm-core#pm-destroydetached)
 
 ***
-## FmmReactPanelT
+## FmmReactPanelTag
 Component to create and manage a [FmmReactPanel](#fmmreactpanel).
 
 Property | Type | Required
@@ -144,7 +144,7 @@ Property | Type | Required
 
 ***
 ## useFmmReactPanel
-Hook version of [FmmReactPanelT](#fmmreactpanelt) that returns a [FmmReactPanel](#fmmreactpanel).
+Hook version of [FmmReactPanelTag](#fmmreactpaneltag) that returns a [FmmReactPanel](#fmmreactpanel).
 
 Parameter | Type | Required
 --- | --- | :---:
@@ -153,7 +153,7 @@ Parameter | Type | Required
 [vertical](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatepanel) | boolean
 
 ***
-## FmmReactStoreT
+## FmmReactStoreTag
 Component to create and manage a [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
 
 Property | Type | Required
@@ -163,7 +163,7 @@ Property | Type | Required
 
 ***
 ## useFmmReactStore
-Hook version of [FmmReactStoreT](#fmmreactstoret) that returns a [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
+Hook version of [FmmReactStoreTag](#fmmreactstoretag) that returns a [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
 
 Parameter | Type | Required
 --- | --- | :---:
