@@ -10,74 +10,37 @@ npm install --save @fmm/react
 ```
 
 ## Adding Form Minimap
-Before
+The code sample below shows the lines added to a simple form to add a minimap (M) or a minimap with panel (P)
 ```jsx
-    function App() {
-        return (
-            <div className="App">
-                <form>
-                    <input id="Input1"/><br/>
-                    <input id="Input2"/><br/>
-                    <input id="Input3"/><br/>
-                    <input id="Input4"/>
-                </form>
-            </div>
-        );
-    }
+M P         import React from 'react';
+M           import { FmmReactMinimapTag } from '@eafmm/react';
+  P         import { FmmReactMinimapTag, FmmReactPanelTag } from '@eafmm/react';
 
-    export default App;
-```
-After without panel
-```jsx
-    import React from 'react';
-    import { FmmReactMinimapTag } from '@eafmm/react';
+            function App() {
+M               var parentRef = React.useRef();
+  P             var anchorRef = React.useRef();
+  P             var panelRef = React.useRef();
+M               var css = '.fmm-frame { height: 50px; }';
+  P             var css = '.fmm-frame { height: 50px; } .fmm-panel { height: 0; }';
+                return (
+                    <div className="App">
+M P                     <style>{css}</style>
+M                       <div ref={parentRef} style={{width:'70px', height:'50px', marginLeft:'200px'}}></div>
+  P                     <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
+  P                     <FmmReactPanelTag ref={panelRef}/>
+                        <form>
+M                           <FmmReactMinimapTag parentRef={parentRef} title='Title'/>
+  P                         <FmmReactMinimapTag anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
+                            <input id="Input1"/><br/>
+                            <input id="Input2"/><br/>
+                            <input id="Input3"/><br/>
+                            <input id="Input4"/>
+                        </form>
+                    </div>
+                );
+            }
 
-    function App() {
-        var parentRef = React.useRef();
-        var css = '.fmm-frame { height: 50px; }';
-        return (
-            <div className="App">
-                <style>{css}</style>
-                <div ref={parentRef} style={{width:'70px', height:'50px', marginLeft:'200px'}}></div>
-                <form>
-                    <FmmReactMinimapTag parentRef={parentRef} title='Title'/>
-                    <input id="Input1"/><br/>
-                    <input id="Input2"/><br/>
-                    <input id="Input3"/><br/>
-                    <input id="Input4"/>
-                </form>
-            </div>
-        );
-    }
-
-    export default App;
-```
-After with panel
-```jsx
-    import React from 'react';
-    import { FmmReactMinimapTag, FmmReactPanelTag } from '@eafmm/react';
-
-    function App() {
-        var anchorRef = React.useRef();
-        var panelRef = React.useRef();
-        var css = '.fmm-frame { height: 50px; } .fmm-panel { height: 0; }';
-        return (
-            <div className="App">
-                <style>{css}</style>
-                <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
-                <FmmReactPanelTag ref={panelRef}/>
-                <form>
-                    <FmmReactMinimapTag anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
-                    <input id="Input1"/><br/>
-                    <input id="Input2"/><br/>
-                    <input id="Input3"/><br/>
-                    <input id="Input4"/>
-                </form>
-            </div>
-        );
-    }
-
-    export default App;
+            export default App;
 ```
 
 ***
