@@ -1,5 +1,5 @@
 # Form Minimap React
-React components and hooks for [Form Minimap](https://github.com/sparrowhawk-ea/fmm-core).
+React components and hooks for [Form Minimap](https://www.npmjs.com/package/@eafmm/core).
 Please consult that documentation for further information on the concepts mentioned below.
 
 ***
@@ -46,12 +46,12 @@ M                           <FmmReactMinimapTag parentRef={parentRef} title='Tit
 ***
 # API
 ## FmmReactMinimap
-Adapter for [FmmMinimap](https://github.com/sparrowhawk-ea/fmm-core#fmmminimap) returned from [FmmReactMinimapTag](#fmmreactminimaptag) or [useFmmReactMinimap](#usefmmreactminimap).
+Adapter for [FmmMinimap](https://www.npmjs.com/package/@eafmm/core#fmmminimap) returned from [FmmReactMinimapTag](#fmmreactminimaptag) or [useFmmReactMinimap](#usefmmreactminimap).
 
 | Method
 | ---
-| [destructor](https://github.com/sparrowhawk-ea/fmm-core#mm-destructor)
-| [takeSnapshot](https://github.com/sparrowhawk-ea/fmm-core#mm-takesnapshot)
+| [destructor](https://www.npmjs.com/package/@eafmm/core#mm-destructor)
+| [takeSnapshot](https://www.npmjs.com/package/@eafmm/core#mm-takesnapshot)
 
 ***
 ## FmmReactMinimapTag
@@ -61,22 +61,22 @@ For minimaps in a panel, use the panelRef property; otherwise use the parentRef 
 
 Property | Type | Required
 --- | --- | :---:
-[aggregateLabels](https://github.com/sparrowhawk-ea/fmm-core#mcp-aggregatelabels) | [FmmMapString](https://github.com/sparrowhawk-ea/fmm-core#fmmmapstring)
-[anchorRef](https://github.com/sparrowhawk-ea/fmm-core#mcp-anchor) | React.RefObject\<HTMLElement\>
-[customWidgetIds](https://github.com/sparrowhawk-ea/fmm-core#mm-compose-customwidgetids) | string[]
-[debounceMsec](https://github.com/sparrowhawk-ea/fmm-core#mcp-debouncemsec) | number
-[dynamicLabels](https://github.com/sparrowhawk-ea/fmm-core#mcp-dynamiclabels) | string[]
-[framework](https://github.com/sparrowhawk-ea/fmm-core#mcp-framework) | [FmmFramework](https://github.com/sparrowhawk-ea/fmm-core#fmmframework)
-[onUpdate](https://github.com/sparrowhawk-ea/fmm-core#mcp-onupdate) | [FmmOnUpdate](https://github.com/sparrowhawk-ea/fmm-core#fmmonupdate)
-[pageRef](https://github.com/sparrowhawk-ea/fmm-core#mcp-page) | React.RefObject\<HTMLElement\>
+[aggregateLabels](https://www.npmjs.com/package/@eafmm/core#mcp-aggregatelabels) | [FmmMapString](https://www.npmjs.com/package/@eafmm/core#fmmmapstring)
+[anchorRef](https://www.npmjs.com/package/@eafmm/core#mcp-anchor) | React.RefObject\<HTMLElement\>
+[customWidgetIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customwidgetids) | string[]
+[debounceMsec](https://www.npmjs.com/package/@eafmm/core#mcp-debouncemsec) | number
+[dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
+[framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
+[onUpdate](https://www.npmjs.com/package/@eafmm/core#mcp-onupdate) | [FmmOnUpdate](https://www.npmjs.com/package/@eafmm/core#fmmonupdate)
+[pageRef](https://www.npmjs.com/package/@eafmm/core#mcp-page) | React.RefObject\<HTMLElement\>
 panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
-[parentRef](https://github.com/sparrowhawk-ea/fmm-core#pcm-parent) | React.RefObject\<HTMLElement\>
-[storeRef](https://github.com/sparrowhawk-ea/fmm-core#mcp-store) | React.RefObject\<[FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore)\>
-[title](https://github.com/sparrowhawk-ea/fmm-core#mcp-title) | string | &check;
-[usePanelDetail](https://github.com/sparrowhawk-ea/fmm-core#mcp-usepaneldetail) | boolean
-[useWidthToScale](https://github.com/sparrowhawk-ea/fmm-core#mcp-usewidthtoscale) | boolean
-[verbosity](https://github.com/sparrowhawk-ea/fmm-core#mcp-verbosity) | number
-[widgetFactories](https://github.com/sparrowhawk-ea/fmm-core#mcp-widgetfactories) | [FmmWidgetFactory](https://github.com/sparrowhawk-ea/fmm-core#fmmwidgetfactory)[]
+[parentRef](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | React.RefObject\<HTMLElement\>
+[storeRef](https://www.npmjs.com/package/@eafmm/core#mcp-store) | React.RefObject\<[FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore)\>
+[title](https://www.npmjs.com/package/@eafmm/core#mcp-title) | string | &check;
+[usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | boolean
+[useWidthToScale](https://www.npmjs.com/package/@eafmm/core#mcp-usewidthtoscale) | boolean
+[verbosity](https://www.npmjs.com/package/@eafmm/core#mcp-verbosity) | number
+[widgetFactories](https://www.npmjs.com/package/@eafmm/core#mcp-widgetfactories) | [FmmWidgetFactory](https://www.npmjs.com/package/@eafmm/core#fmmwidgetfactory)[]
 
 ***
 ## useFmmReactMinimap
@@ -85,16 +85,16 @@ Hook version of [FmmReactMinimapTag](#fmmreactminimaptag) that returns a [FmmRea
 Parameter | Type | Required | Description
 --- | --- | :---: | ---
 key | string | &check; | Minimap is recreated when key changes.  Any previous minimap is detached.
-[form](https://github.com/sparrowhawk-ea/fmm-core#fmmminimapcreateparam) | React.RefObject\<HTMLFormElement\> | &check;
+[form](https://www.npmjs.com/package/@eafmm/core#fmmminimapcreateparam) | React.RefObject\<HTMLFormElement\> | &check;
 p | FmmReactMinimapProps | &check; | Object with properties of [FmmReactMinimapTag](#fmmreactminimaptag).
 
 ***
 ## FmmReactPanel
-Adapter for [FmmPanel](https://github.com/sparrowhawk-ea/fmm-core#fmmpanel) returned from [FmmReactPanelTag](#fmmreactpaneltag) or [useFmmReactPanel](#usefmmreactpanel).
+Adapter for [FmmPanel](https://www.npmjs.com/package/@eafmm/core#fmmpanel) returned from [FmmReactPanelTag](#fmmreactpaneltag) or [useFmmReactPanel](#usefmmreactpanel).
 
 | Method
 | ---
-| [destroyDetached](https://github.com/sparrowhawk-ea/fmm-core#pm-destroydetached)
+| [destroyDetached](https://www.npmjs.com/package/@eafmm/core#pm-destroydetached)
 
 ***
 ## FmmReactPanelTag
@@ -102,8 +102,8 @@ Component to create and manage a [FmmReactPanel](#fmmreactpanel).
 
 Property | Type | Required
 --- | --- | :---:
-[detailParentRef](https://github.com/sparrowhawk-ea/fmm-core#pcp-detailparent) | React.RefObject\<HTMLDivElement\>
-[vertical](https://github.com/sparrowhawk-ea/fmm-core#pcp-vertical) | boolean
+[detailParentRef](https://www.npmjs.com/package/@eafmm/core#pcp-detailparent) | React.RefObject\<HTMLDivElement\>
+[vertical](https://www.npmjs.com/package/@eafmm/core#pcp-vertical) | boolean
 
 ***
 ## useFmmReactPanel
@@ -111,24 +111,24 @@ Hook version of [FmmReactPanelTag](#fmmreactpaneltag) that returns a [FmmReactPa
 
 Parameter | Type | Required
 --- | --- | :---:
-[hostRef](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatepanel) | string | &check;
-[detailParentRef](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatepanel) | React.RefObject\<HTMLDivElement\>
-[vertical](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatepanel) | boolean
+[hostRef](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | string | &check;
+[detailParentRef](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | React.RefObject\<HTMLDivElement\>
+[vertical](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | boolean
 
 ***
 ## FmmReactStoreTag
-Component to create and manage a [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
+Component to create and manage a [FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore).
 
 Property | Type | Required
 --- | --- | :---:
-[errors](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatestore) | [FmmMapErrors](https://github.com/sparrowhawk-ea/fmm-core#fmmmaperrors)
-[values](https://github.com/sparrowhawk-ea/fmm-core#fmmcreatestore) | [FmmMapValues](https://github.com/sparrowhawk-ea/fmm-core#fmmmapvalues) | &check;
+[errors](https://www.npmjs.com/package/@eafmm/core#fmmcreatestore) | [FmmMapErrors](https://www.npmjs.com/package/@eafmm/core#fmmmaperrors)
+[values](https://www.npmjs.com/package/@eafmm/core#fmmcreatestore) | [FmmMapValues](https://www.npmjs.com/package/@eafmm/core#fmmmapvalues) | &check;
 
 ***
 ## useFmmReactStore
-Hook version of [FmmReactStoreTag](#fmmreactstoretag) that returns a [FmmStore](https://github.com/sparrowhawk-ea/fmm-core#fmmstore).
+Hook version of [FmmReactStoreTag](#fmmreactstoretag) that returns a [FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore).
 
 Parameter | Type | Required
 --- | --- | :---:
-[values](https://github.com/sparrowhawk-ea/fmm-core#scp-values) | [FmmMapValues](https://github.com/sparrowhawk-ea/fmm-core#fmmmapvalues) | &check;
-[errors](https://github.com/sparrowhawk-ea/fmm-core#scp-errors) | [FmmMapErrors](https://github.com/sparrowhawk-ea/fmm-core#fmmmaperrors)
+[values](https://www.npmjs.com/package/@eafmm/core#scp-values) | [FmmMapValues](https://www.npmjs.com/package/@eafmm/core#fmmmapvalues) | &check;
+[errors](https://www.npmjs.com/package/@eafmm/core#scp-errors) | [FmmMapErrors](https://www.npmjs.com/package/@eafmm/core#fmmmaperrors)
