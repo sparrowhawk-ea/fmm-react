@@ -1,10 +1,10 @@
 import React from 'react';
-import { Fmm, FmmMapStore } from '@eafmm/core';
+import { Fmm, FmmFormHTML, FmmStoreImpl } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M R E A C T M I N I M A P T A G
 // =================================================================================================================================
 var FmmReactMinimapFn = function (_a, ref) {
-    var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customWidgetIds = _a.customWidgetIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, parentRef = _a.parentRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, widgetFactories = _a.widgetFactories;
+    var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customElementIds = _a.customElementIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, parentRef = _a.parentRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, zoomFactor = _a.zoomFactor;
     if (children)
         throw new Error('FmmReactMinimapTag is a contentless tag');
     var thisForm = React.useRef();
@@ -19,7 +19,7 @@ var FmmReactMinimapFn = function (_a, ref) {
     var p = {
         aggregateLabels: aggregateLabels,
         anchorRef: anchorRef,
-        customWidgetIds: customWidgetIds,
+        customElementIds: customElementIds,
         debounceMsec: debounceMsec,
         dynamicLabels: dynamicLabels,
         framework: framework,
@@ -32,7 +32,7 @@ var FmmReactMinimapFn = function (_a, ref) {
         usePanelDetail: usePanelDetail,
         useWidthToScale: useWidthToScale,
         verbosity: verbosity,
-        widgetFactories: widgetFactories
+        zoomFactor: zoomFactor
     };
     useSetRef(ref, useFmmReactMinimap('', thisForm, p));
     return React.createElement("div", { ref: setFormRef }); // avoid using form element tag to keep out of the way of any form processing library
@@ -69,16 +69,15 @@ export var useFmmReactMinimap = function (key, form, p) {
             anchor: (_a = p.anchorRef) === null || _a === void 0 ? void 0 : _a.current,
             debounceMsec: p.debounceMsec,
             dynamicLabels: p.dynamicLabels,
-            form: form.current,
+            form: new FmmFormHTML(form.current, (_b = p.pageRef) === null || _b === void 0 ? void 0 : _b.current),
             framework: p.framework,
             onUpdate: p.onUpdate,
-            page: (_b = p.pageRef) === null || _b === void 0 ? void 0 : _b.current,
             store: (_c = p.storeRef) === null || _c === void 0 ? void 0 : _c.current,
             title: p.title,
             usePanelDetail: p.usePanelDetail,
             useWidthToScale: p.useWidthToScale,
             verbosity: p.verbosity,
-            widgetFactories: p.widgetFactories
+            zoomFactor: p.zoomFactor
         };
         var panelX = ((_d = p.panelRef) === null || _d === void 0 ? void 0 : _d.current) ? G.PANELS.get(p.panelRef.current) : undefined;
         thisFmm.current = panelX ? panelX.createMinimap(fmcp) : Fmm.createMinimap(fmcp, (_e = p.parentRef) === null || _e === void 0 ? void 0 : _e.current);
@@ -103,8 +102,8 @@ export var useFmmReactMinimap = function (key, form, p) {
     }, [key]);
     React.useEffect(function () {
         if (thisFmm.current)
-            thisFmm.current.compose(p.customWidgetIds);
-    }, [p.customWidgetIds, key, thisFmm]);
+            thisFmm.current.compose(p.customElementIds);
+    }, [p.customElementIds, key, thisFmm]);
     if (thisFmm.current)
         thisFmm.current.takeSnapshot();
     return thisMinimap;
@@ -131,7 +130,7 @@ export var useFmmReactPanel = function (hostRef, detailParentRef, vertical) {
 //						U S E F M M R E A C T S T O R E
 // =================================================================================================================================
 export var useFmmReactStore = function (values, errors) {
-    var thisStore = React.useRef(new FmmMapStore(values, errors));
+    var thisStore = React.useRef(new FmmStoreImpl(values, errors));
     thisStore.current.update(values, errors);
     return thisStore;
 };

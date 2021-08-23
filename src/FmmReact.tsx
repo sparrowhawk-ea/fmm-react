@@ -1,17 +1,17 @@
 import React from 'react';
 import {
 	Fmm,
+	FmmFormHTML,
 	FmmFramework,
-	FmmMapErrors,
-	FmmMapStore,
 	FmmMapString,
-	FmmMapValues,
 	FmmMinimap,
 	FmmMinimapCreateParam,
 	FmmOnUpdate,
 	FmmPanel,
 	FmmStore,
-	FmmWidgetFactory
+	FmmStoreErrors,
+	FmmStoreImpl,
+	FmmStoreValues
 } from '@eafmm/core';
 
 // =================================================================================================================================
@@ -27,21 +27,21 @@ export interface FmmReactMinimap {
 // =================================================================================================================================
 export interface FmmReactMinimapProps {
 	readonly aggregateLabels?: FmmMapString;
-	readonly anchorRef?: React.RefObject<HTMLElement>;
+	readonly anchorRef?: React.RefObject<HTMLDivElement>;
 	readonly debounceMsec?: number;
 	readonly dynamicLabels?: string[];
 	readonly framework?: FmmFramework;
 	readonly onUpdate?: FmmOnUpdate;
 	readonly pageRef?: React.RefObject<HTMLElement>;
 	readonly panelRef?: React.RefObject<FmmReactPanel>;
-	readonly parentRef?: React.RefObject<HTMLElement>;
+	readonly parentRef?: React.RefObject<HTMLDivElement>;
 	readonly storeRef?: React.RefObject<FmmStore>;
 	readonly title: string;
 	readonly usePanelDetail?: boolean;
 	readonly useWidthToScale?: boolean;
 	readonly verbosity?: number;
-	readonly widgetFactories?: FmmWidgetFactory[];
-	customWidgetIds?: string[];
+	readonly zoomFactor?: number;
+	customElementIds?: string[];
 }
 
 // =================================================================================================================================
@@ -52,7 +52,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		aggregateLabels,
 		anchorRef,
 		children,
-		customWidgetIds,
+		customElementIds,
 		debounceMsec,
 		dynamicLabels,
 		framework,
@@ -65,7 +65,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		usePanelDetail,
 		useWidthToScale,
 		verbosity,
-		widgetFactories
+		zoomFactor
 	}: React.PropsWithChildren<FmmReactMinimapProps>,
 	ref
 ) => {
@@ -80,7 +80,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 	const p: FmmReactMinimapProps = {
 		aggregateLabels,
 		anchorRef,
-		customWidgetIds,
+		customElementIds,
 		debounceMsec,
 		dynamicLabels,
 		framework,
@@ -93,7 +93,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		usePanelDetail,
 		useWidthToScale,
 		verbosity,
-		widgetFactories
+		zoomFactor
 	};
 	useSetRef(ref, useFmmReactMinimap('', thisForm, p));
 	return <div ref={setFormRef}></div>; // avoid using form element tag to keep out of the way of any form processing library
@@ -133,8 +133,8 @@ export const FmmReactPanelTag = React.forwardRef(FmmReactPanelFn);
 //						F M M R E A C T S T O R E T A G
 // =================================================================================================================================
 interface FmmReactStoreProps {
-	errors?: FmmMapErrors;
-	values: FmmMapValues;
+	errors?: FmmStoreErrors;
+	values: FmmStoreValues;
 }
 const FmmReactStoreFn: React.ForwardRefRenderFunction<FmmStore, FmmReactStoreProps> = (
 	{ children, errors, values }: React.PropsWithChildren<FmmReactStoreProps>,
@@ -159,16 +159,15 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 			anchor: p.anchorRef?.current,
 			debounceMsec: p.debounceMsec,
 			dynamicLabels: p.dynamicLabels,
-			form: form.current,
+			form: new FmmFormHTML(form.current, p.pageRef?.current),
 			framework: p.framework,
 			onUpdate: p.onUpdate,
-			page: p.pageRef?.current,
 			store: p.storeRef?.current,
 			title: p.title,
 			usePanelDetail: p.usePanelDetail,
 			useWidthToScale: p.useWidthToScale,
 			verbosity: p.verbosity,
-			widgetFactories: p.widgetFactories
+			zoomFactor: p.zoomFactor
 		};
 		const panelX = p.panelRef?.current ? G.PANELS.get(p.panelRef.current) : undefined;
 		thisFmm.current = panelX? panelX.createMinimap(fmcp): Fmm.createMinimap(fmcp, p.parentRef?.current);
@@ -189,8 +188,8 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 		return createMinimap();
 	}, [key]);
 	React.useEffect(() => {
-		if (thisFmm.current) thisFmm.current.compose(p.customWidgetIds);
-	}, [p.customWidgetIds, key, thisFmm]);
+		if (thisFmm.current) thisFmm.current.compose(p.customElementIds);
+	}, [p.customElementIds, key, thisFmm]);
 	if (thisFmm.current) thisFmm.current.takeSnapshot();
 	return thisMinimap;
 };
@@ -221,11 +220,11 @@ export const useFmmReactPanel = (
 // =================================================================================================================================
 //						U S E F M M R E A C T S T O R E
 // =================================================================================================================================
-export const useFmmReactStore = <TV extends FmmMapValues, TE extends FmmMapErrors>(
+export const useFmmReactStore = <TV extends FmmStoreValues, TE extends FmmStoreErrors>(
 	values: TV,
 	errors?: TE
 ): React.RefObject<FmmStore> => {
-	const thisStore = React.useRef(new FmmMapStore(values, errors));
+	const thisStore = React.useRef(new FmmStoreImpl(values, errors));
 	thisStore.current.update(values, errors);
 	return thisStore;
 };

@@ -1,10 +1,10 @@
-import { FmmFramework, FmmFrameworkItem, FmmFrameworkItemBase } from '@eafmm/core';
+import { FmmFormElementHTML, FmmFramework, FmmFrameworkItemHTML } from '@eafmm/core';
 
 // =================================================================================================================================
 //						F M M M A T E R I A L U I
 // =================================================================================================================================
 export const FmmMaterialUI: FmmFramework = {
-	createFrameworkItem: (_: string, e: HTMLElement): FmmFrameworkItem => {
+	createFrameworkItem(_: string, e: FmmFormElementHTML): FmmFrameworkItemHTML {
 		if (e.tagName === 'INPUT') {
 			const type = (e as HTMLInputElement).type;
 			if (type === 'checkbox' || type === 'radio') return G.Check;
@@ -22,7 +22,7 @@ export const FmmMaterialUI: FmmFramework = {
 // =================================================================================================================================
 //						F R A M E W O R K I T E M
 // =================================================================================================================================
-class FrameworkItem extends FmmFrameworkItemBase {
+class FrameworkItem extends FmmFrameworkItemHTML {
 	// =============================================================================================================================
 	public constructor(wrapperClass?: string) {
 		super(wrapperClass || 'MuiFormControl-root');

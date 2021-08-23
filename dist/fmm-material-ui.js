@@ -1,5 +1,5 @@
 import { __extends } from "tslib";
-import { FmmFrameworkItemBase } from '@eafmm/core';
+import { FmmFrameworkItemHTML } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M M A T E R I A L U I
 // =================================================================================================================================
@@ -33,7 +33,7 @@ var FrameworkItem = /** @class */ (function (_super) {
         return (_a = envelope === null || envelope === void 0 ? void 0 : envelope.querySelector('.MuiFormHelperText-root')) === null || _a === void 0 ? void 0 : _a.textContent;
     };
     return FrameworkItem;
-}(FmmFrameworkItemBase));
+}(FmmFrameworkItemHTML));
 // =================================================================================================================================
 //						F R A M E W O R K I T E M C H E C K
 // =================================================================================================================================

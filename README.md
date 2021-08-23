@@ -63,12 +63,12 @@ Property | Type | Required
 --- | --- | :---:
 [aggregateLabels](https://www.npmjs.com/package/@eafmm/core#mcp-aggregatelabels) | [FmmMapString](https://www.npmjs.com/package/@eafmm/core#fmmmapstring)
 [anchorRef](https://www.npmjs.com/package/@eafmm/core#mcp-anchor) | React.RefObject\<HTMLElement\>
-[customWidgetIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customwidgetids) | string[]
+[customElementIds](https://www.npmjs.com/package/@eafmm/core#mm-compose-customelementids) | string[]
 [debounceMsec](https://www.npmjs.com/package/@eafmm/core#mcp-debouncemsec) | number
 [dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
 [framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
 [onUpdate](https://www.npmjs.com/package/@eafmm/core#mcp-onupdate) | [FmmOnUpdate](https://www.npmjs.com/package/@eafmm/core#fmmonupdate)
-[pageRef](https://www.npmjs.com/package/@eafmm/core#mcp-page) | React.RefObject\<HTMLElement\>
+[pageRef](https://www.npmjs.com/package/@eafmm/core#fmmform-page) | React.RefObject\<HTMLElement\>
 panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
 [parentRef](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | React.RefObject\<HTMLElement\>
 [storeRef](https://www.npmjs.com/package/@eafmm/core#mcp-store) | React.RefObject\<[FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore)\>
@@ -76,7 +76,7 @@ panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
 [usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | boolean
 [useWidthToScale](https://www.npmjs.com/package/@eafmm/core#mcp-usewidthtoscale) | boolean
 [verbosity](https://www.npmjs.com/package/@eafmm/core#mcp-verbosity) | number
-[widgetFactories](https://www.npmjs.com/package/@eafmm/core#mcp-widgetfactories) | [FmmWidgetFactory](https://www.npmjs.com/package/@eafmm/core#fmmwidgetfactory)[]
+[zoomFactor](https://www.npmjs.com/package/@eafmm/core#mcp-zoomfactor) | number
 
 ***
 ## useFmmReactMinimap
