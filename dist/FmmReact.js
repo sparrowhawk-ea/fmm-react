@@ -1,10 +1,11 @@
+import { __assign, __rest } from "tslib";
 import React from 'react';
 import { Fmm, FmmFormHTML, FmmStoreImpl } from '@eafmm/core';
 // =================================================================================================================================
 //						F M M R E A C T M I N I M A P T A G
 // =================================================================================================================================
 var FmmReactMinimapFn = function (_a, ref) {
-    var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customElementIds = _a.customElementIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, parentRef = _a.parentRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, zoomFactor = _a.zoomFactor;
+    var aggregateLabels = _a.aggregateLabels, anchorRef = _a.anchorRef, children = _a.children, customElementIds = _a.customElementIds, debounceMsec = _a.debounceMsec, dynamicLabels = _a.dynamicLabels, framework = _a.framework, onUpdate = _a.onUpdate, pageRef = _a.pageRef, panelRef = _a.panelRef, parentRef = _a.parentRef, storeRef = _a.storeRef, title = _a.title, usePanelDetail = _a.usePanelDetail, useWidthToScale = _a.useWidthToScale, verbosity = _a.verbosity, zoomFactor = _a.zoomFactor, otherAttributes = __rest(_a, ["aggregateLabels", "anchorRef", "children", "customElementIds", "debounceMsec", "dynamicLabels", "framework", "onUpdate", "pageRef", "panelRef", "parentRef", "storeRef", "title", "usePanelDetail", "useWidthToScale", "verbosity", "zoomFactor"]);
     if (children)
         throw new Error('FmmReactMinimapTag is a contentless tag');
     var thisForm = React.useRef();
@@ -35,7 +36,7 @@ var FmmReactMinimapFn = function (_a, ref) {
         zoomFactor: zoomFactor
     };
     useSetRef(ref, useFmmReactMinimap('', thisForm, p));
-    return React.createElement("div", { ref: setFormRef }); // avoid using form element tag to keep out of the way of any form processing library
+    return React.createElement('div', __assign(__assign({}, otherAttributes), { ref: setFormRef }));
 };
 export var FmmReactMinimapTag = React.forwardRef(FmmReactMinimapFn);
 var FmmReactPanelFn = function (_a, ref) {

@@ -65,7 +65,8 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		usePanelDetail,
 		useWidthToScale,
 		verbosity,
-		zoomFactor
+		zoomFactor,
+		...otherAttributes
 	}: React.PropsWithChildren<FmmReactMinimapProps>,
 	ref
 ) => {
@@ -96,7 +97,10 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		zoomFactor
 	};
 	useSetRef(ref, useFmmReactMinimap('', thisForm, p));
-	return <div ref={setFormRef}></div>; // avoid using form element tag to keep out of the way of any form processing library
+	return React.createElement('div', { // don't create form element tag to keep out of the way of any form processing library
+		...otherAttributes,
+		ref: setFormRef
+	});
 };
 export const FmmReactMinimapTag = React.forwardRef(FmmReactMinimapFn);
 
