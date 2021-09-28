@@ -37,8 +37,8 @@ interface FmmReactStoreProps {
 }
 export declare const FmmReactStoreTag: React.ForwardRefExoticComponent<FmmReactStoreProps & React.RefAttributes<FmmStore>>;
 export declare const useFmmReactMinimap: (key: string, form: React.RefObject<HTMLFormElement>, p: FmmReactMinimapProps) => React.RefObject<FmmReactMinimap>;
-export declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, detailParentRef?: React.RefObject<HTMLDivElement>, vertical?: boolean) => React.RefObject<FmmReactPanel>;
-export declare const useFmmReactStore: <TV extends FmmStoreValues, TE extends FmmStoreErrors>(values: TV, errors?: TE) => React.RefObject<FmmStore>;
+export declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, detailParentRef?: React.RefObject<HTMLDivElement> | undefined, vertical?: boolean | undefined) => React.RefObject<FmmReactPanel>;
+export declare const useFmmReactStore: <TV extends FmmStoreValues, TE extends FmmStoreErrors>(values: TV, errors?: TE | undefined) => React.RefObject<FmmStore>;
 export declare const useOnceAfterFirstRender: (fn: () => void) => void;
-export declare const useSetRef: <T extends unknown>(ref: ((instance: T) => void) | React.MutableRefObject<T>, value: React.RefObject<T>) => void;
+export declare const useSetRef: <T extends unknown>(ref: ((instance: T | null) => void) | React.ForwardedRef<T>, value: React.RefObject<T>) => void;
 export {};

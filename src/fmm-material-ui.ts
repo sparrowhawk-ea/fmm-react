@@ -29,8 +29,8 @@ class FrameworkItem extends FmmFrameworkItemHTML {
 	}
 
 	// =============================================================================================================================
-	public getError(_: string, _e: HTMLElement, envelope: HTMLElement, _v: boolean): string {
-		return envelope?.querySelector('.MuiFormHelperText-root')?.textContent;
+	public getError(_: string, _e: HTMLElement, envelope: HTMLElement, _v: boolean) {
+		return envelope?.querySelector('.MuiFormHelperText-root')?.textContent || '';
 	}
 }
 
@@ -44,8 +44,8 @@ class FrameworkItemCheck extends FrameworkItem {
 	}
 
 	// =============================================================================================================================
-	public getLabel(_: string, envelope: HTMLElement): HTMLElement {
-		return envelope?.querySelector('SPAN.MuiFormControlLabel-label');
+	public getLabel(_: string, envelope: HTMLElement) {
+		return envelope?.querySelector('SPAN.MuiFormControlLabel-label') as HTMLElement;
 	}
 }
 
@@ -54,8 +54,8 @@ class FrameworkItemCheck extends FrameworkItem {
 // =================================================================================================================================
 class FrameworkItemSelect extends FrameworkItem {
 	// =============================================================================================================================
-	public getValue(name: string, e: HTMLElement, _n: HTMLElement, _l: string): string {
-		return e.parentElement.querySelector('#mui-component-select-' + name)?.textContent;
+	public getValue(name: string, e: HTMLElement, _n: HTMLElement, _l: string) {
+		return e.parentElement?.querySelector('#mui-component-select-' + name)?.textContent || '';
 	}
 }
 

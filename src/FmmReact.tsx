@@ -71,7 +71,7 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 	ref
 ) => {
 	if (children) throw new Error('FmmReactMinimapTag is a contentless tag');
-	const thisForm = React.useRef<HTMLFormElement>();
+	const thisForm = React.useRef<HTMLFormElement | null>(null);
 	const setFormRef = (e: HTMLDivElement) => {
 		let form = e?.parentElement;
 		while (form && form.tagName !== 'FORM') form = form.parentElement;
@@ -123,7 +123,7 @@ const FmmReactPanelFn: React.ForwardRefRenderFunction<FmmReactPanel, FmmReactPan
 	ref
 ) => {
 	if (children) throw new Error('FmmReactPanelTag is a contentless tag');
-	const thisHost = React.useRef<HTMLDivElement>();
+	const thisHost = React.useRef<HTMLDivElement>(null);
 	useSetRef(ref, useFmmReactPanel(thisHost, detailParentRef, vertical));
 	return (
 		<div className='fmm-panel' ref={thisHost}>
@@ -156,17 +156,17 @@ export const FmmReactStoreTag = React.forwardRef(FmmReactStoreFn);
 export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormElement>, p: FmmReactMinimapProps):
 	React.RefObject<FmmReactMinimap> => {
 	const thisFmm = React.useRef<FmmMinimap>();
-	const thisMinimap = React.useRef<FmmReactMinimap>();
+	const thisMinimap = React.useRef<FmmReactMinimap | null>(null);
 	const createMinimap = (): (() => void) => {
 		const fmcp: FmmMinimapCreateParam = {
 			aggregateLabels: p.aggregateLabels,
-			anchor: p.anchorRef?.current,
+			anchor: p.anchorRef?.current as HTMLDivElement,
 			debounceMsec: p.debounceMsec,
 			dynamicLabels: p.dynamicLabels,
-			form: new FmmFormHTML(form.current, p.pageRef?.current),
+			form: new FmmFormHTML(form.current as HTMLFormElement, p.pageRef?.current as HTMLElement),
 			framework: p.framework,
 			onUpdate: p.onUpdate,
-			store: p.storeRef?.current,
+			store: p.storeRef?.current as FmmStore,
 			title: p.title,
 			usePanelDetail: p.usePanelDetail,
 			useWidthToScale: p.useWidthToScale,
@@ -174,11 +174,11 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 			zoomFactor: p.zoomFactor
 		};
 		const panelX = p.panelRef?.current ? G.PANELS.get(p.panelRef.current) : undefined;
-		thisFmm.current = panelX? panelX.createMinimap(fmcp): Fmm.createMinimap(fmcp, p.parentRef?.current);
-		if (!thisFmm.current) return undefined;
+		thisFmm.current = panelX ? panelX.createMinimap(fmcp) : Fmm.createMinimap(fmcp, p.parentRef?.current as HTMLDivElement);
+		if (!thisFmm.current) return () => { /**/ };
 		thisMinimap.current = {
 			destructor: () => thisFmm.current?.destructor(),
-			takeSnapshot: () => thisFmm.current?.takeSnapshot()
+			takeSnapshot: () => !!thisFmm.current?.takeSnapshot()
 		};
 		return () => {
 			if (thisFmm.current) thisFmm.current.detach();
@@ -188,7 +188,8 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 	useOnceAfterFirstRender(createMinimap);
 	React.useEffect(() => {
 		if (thisFmm.current) thisFmm.current.destructor();
-		thisMinimap.current = thisFmm.current = undefined;
+		thisMinimap.current = null;
+		thisFmm.current = undefined;
 		return createMinimap();
 	}, [key]);
 	React.useEffect(() => {
@@ -206,16 +207,16 @@ export const useFmmReactPanel = (
 	detailParentRef?: React.RefObject<HTMLDivElement>,
 	vertical?: boolean
 ): React.RefObject<FmmReactPanel> => {
-	const thisPanel = React.useRef<FmmReactPanel>();
+	const thisPanel = React.useRef<FmmReactPanel | null>(null);
 	useOnceAfterFirstRender(() => {
-		const panel = Fmm.createPanel(hostRef.current, detailParentRef?.current, vertical, undefined);
+		const panel = Fmm.createPanel(hostRef.current as HTMLDivElement, detailParentRef?.current as HTMLDivElement, vertical, undefined);
 		thisPanel.current = {
 			destroyDetached: () => panel.destroyDetached()
 		};
 		G.PANELS.set(thisPanel.current, panel);
 		return () => {
 			panel.destructor();
-			G.PANELS.delete(thisPanel.current);
+			G.PANELS.delete(thisPanel.current as FmmReactPanel);
 		};
 	});
 	return thisPanel;
@@ -244,7 +245,7 @@ export const useOnceAfterFirstRender = (fn: () => void): void =>
 //						U S E S E T R E F
 // =================================================================================================================================
 export const useSetRef = <T extends unknown>(
-	ref: React.RefCallback<T> | React.MutableRefObject<T>,
+	ref: React.RefCallback<T> | React.ForwardedRef<T>,
 	value: React.RefObject<T>
 ): void =>
 	React.useEffect(() => {
