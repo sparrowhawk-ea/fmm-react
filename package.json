@@ -5,7 +5,6 @@
 	},
 	"description": "Form Minimap React",
 	"devDependencies": {
-		"@eafmm/core": "*",
 		"@eafmm/demo": "*",
 		"@material-ui/core": "4",
 		"@rollup/plugin-commonjs": "*",

@@ -2,6 +2,8 @@
 React components and hooks for [Form Minimap](https://www.npmjs.com/package/@eafmm/core).
 Please consult that documentation for further information on the concepts mentioned below.
 
+[Demo Appplication](https://htmlpreview.github.io/?https://github.com/sparrowhawk-ea/fmm-react/blob/master/index.html)
+
 ***
 # Getting Started
 ## Installation
