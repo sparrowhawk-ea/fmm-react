@@ -5,7 +5,15 @@
 	},
 	"description": "Form Minimap React",
 	"devDependencies": {
+		"@eafmm/core": "*",
+		"@eafmm/demo": "*",
+		"@material-ui/core": "4",
+		"@rollup/plugin-commonjs": "*",
+		"@rollup/plugin-node-resolve": "*",
+		"@rollup/plugin-replace": "*",
 		"@types/react": "17",
+		"@types/react-dom": "17",
+		"@types/yup": "0",
 		"@typescript-eslint/eslint-plugin": "*",
 		"@typescript-eslint/parser": "*",
 		"eslint": "*",
@@ -13,12 +21,20 @@
 		"eslint-plugin-prettier": "*",
 		"eslint-plugin-react": "7",
 		"eslint-plugin-react-hooks": "4",
+		"final-form-arrays": "3",
+		"formik": "2",
 		"prettier": "*",
 		"react": "17",
+		"react-bootstrap": "1",
+		"react-dom": "17",
+		"react-final-form": "6",
+		"react-final-form-arrays": "3",
 		"rollup": "*",
-		"terser": "*",
-		"tslib": "*",
-		"typescript": "*"
+		"rollup-plugin-dts": "*",
+		"rollup-plugin-esbuild": "*",
+		"rollup-plugin-import-css": "*",
+		"typescript": "*",
+		"yup": "0"
 	},
 	"files": [
 		"dist"
@@ -31,7 +47,7 @@
 	],
 	"license": "MIT",
 	"main": "dist/index.js",
-	"module": "dist/index.min.mjs",
+	"module": "dist/index.mjs",
 	"name": "@eafmm/react",
 	"peerDependencies": {
 		"@eafmm/core": "3"
@@ -51,17 +67,12 @@
 		"url": "git+https://github.com/sparrowhawk-ea/fmm-react.git"
 	},
 	"scripts": {
-		"build": "rm -rf dist && npm run lint && tsc && npm run bundle",
-		"bundle": "npm run bundle:esm && npm run bundle:esm:min && npm run bundle:umd && npm run bundle:umd:min",
-		"bundle:esm": "rollup dist/index.js --file dist/index.mjs --format esm",
-		"bundle:esm:min": "terser --ecma 6 --compress --mangle --module -o dist/index.min.mjs -- dist/index.mjs && gzip -9 -c dist/index.min.mjs > dist/index.min.mjs.gz",
-		"bundle:umd": "rollup dist/index.js --file dist/index.umd.js --format umd --name sayHello",
-		"bundle:umd:min": "terser --ecma 6 --compress --mangle -o dist/index.umd.min.js -- dist/index.umd.js && gzip -9 -c dist/index.umd.min.js > dist/index.umd.min.js.gz",
+		"build": "rm -rf demo dist && npm run lint && rollup -c && npm run gzip",
+		"gzip": "gzip -9 -c dist/index.js > dist/index.js.gz && gzip -9 -c dist/index.mjs > dist/index.mjs.gz && gzip -9 -c demo/index.js > demo/index.js.gz",
 		"lint": "eslint --report-unused-disable-directives --ext .ts,.tsx .",
 		"prepare": "npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"types": "dist/index.d.ts",
-	"unpkg": "dist/index.umd.min.js",
-	"version": "3.0.0"
+	"typings": "dist/index.d.ts",
+	"version": "3.0.1"
 }
