@@ -12,9 +12,9 @@ interface FmmReactMinimapProps {
     readonly dynamicLabels?: string[];
     readonly framework?: FmmFramework;
     readonly onUpdate?: FmmOnUpdate;
+    readonly ordinal?: number;
     readonly pageRef?: React.RefObject<HTMLElement>;
     readonly panelRef?: React.RefObject<FmmReactPanel>;
-    readonly parentRef?: React.RefObject<HTMLDivElement>;
     readonly storeRef?: React.RefObject<FmmStore>;
     readonly title: string;
     readonly usePanelDetail?: boolean;
@@ -28,6 +28,7 @@ interface FmmReactPanel {
     destroyDetached(): void;
 }
 interface FmmReactPanelProps {
+    minimapsCount: number;
     detailParentRef?: React.RefObject<HTMLDivElement>;
     vertical?: boolean;
 }
@@ -38,7 +39,7 @@ interface FmmReactStoreProps {
 }
 declare const FmmReactStoreTag: React.ForwardRefExoticComponent<FmmReactStoreProps & React.RefAttributes<FmmStore>>;
 declare const useFmmReactMinimap: (key: string, form: React.RefObject<HTMLFormElement>, p: FmmReactMinimapProps) => React.RefObject<FmmReactMinimap>;
-declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, detailParentRef?: React.RefObject<HTMLDivElement> | undefined, vertical?: boolean | undefined) => React.RefObject<FmmReactPanel>;
+declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, minimapsCount: number, detailParentRef?: React.RefObject<HTMLDivElement> | undefined, vertical?: boolean | undefined) => React.RefObject<FmmReactPanel>;
 declare const useFmmReactStore: <TV extends FmmStoreValues, TE extends FmmStoreErrors>(values: TV, errors?: TE | undefined) => React.RefObject<FmmStore>;
 declare const useOnceAfterFirstRender: (fn: () => void) => void;
 declare const useSetRef: <T extends unknown>(ref: ((instance: T | null) => void) | React.ForwardedRef<T>, value: React.RefObject<T>) => void;

@@ -32,9 +32,9 @@ export interface FmmReactMinimapProps {
 	readonly dynamicLabels?: string[];
 	readonly framework?: FmmFramework;
 	readonly onUpdate?: FmmOnUpdate;
+	readonly ordinal?: number;
 	readonly pageRef?: React.RefObject<HTMLElement>;
 	readonly panelRef?: React.RefObject<FmmReactPanel>;
-	readonly parentRef?: React.RefObject<HTMLDivElement>;
 	readonly storeRef?: React.RefObject<FmmStore>;
 	readonly title: string;
 	readonly usePanelDetail?: boolean;
@@ -57,9 +57,9 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		dynamicLabels,
 		framework,
 		onUpdate,
+		ordinal,
 		pageRef,
 		panelRef,
-		parentRef,
 		storeRef,
 		title,
 		usePanelDetail,
@@ -86,9 +86,9 @@ const FmmReactMinimapFn: React.ForwardRefRenderFunction<FmmReactMinimap, FmmReac
 		dynamicLabels,
 		framework,
 		onUpdate,
+		ordinal,
 		pageRef,
 		panelRef,
-		parentRef,
 		storeRef,
 		title,
 		usePanelDetail,
@@ -115,16 +115,17 @@ export interface FmmReactPanel {
 //						F M M R E A C T P A N E L T A G
 // =================================================================================================================================
 interface FmmReactPanelProps {
+	minimapsCount: number;
 	detailParentRef?: React.RefObject<HTMLDivElement>;
 	vertical?: boolean;
 }
 const FmmReactPanelFn: React.ForwardRefRenderFunction<FmmReactPanel, FmmReactPanelProps> = (
-	{ children, detailParentRef, vertical = false }: React.PropsWithChildren<FmmReactPanelProps>,
+	{ children, minimapsCount, detailParentRef, vertical = false }: React.PropsWithChildren<FmmReactPanelProps>,
 	ref
 ) => {
 	if (children) throw new Error('FmmReactPanelTag is a contentless tag');
 	const thisHost = React.useRef<HTMLDivElement>(null);
-	useSetRef(ref, useFmmReactPanel(thisHost, detailParentRef, vertical));
+	useSetRef(ref, useFmmReactPanel(thisHost, minimapsCount, detailParentRef, vertical));
 	return (
 		<div className='fmm-panel' ref={thisHost}>
 			<style>{Fmm.CSS}</style>
@@ -166,6 +167,7 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 			form: new FmmFormHTML(form.current as HTMLFormElement, p.pageRef?.current as HTMLElement),
 			framework: p.framework,
 			onUpdate: p.onUpdate,
+			ordinal: p.ordinal,
 			store: p.storeRef?.current as FmmStore,
 			title: p.title,
 			usePanelDetail: p.usePanelDetail,
@@ -174,7 +176,7 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 			zoomFactor: p.zoomFactor
 		};
 		const panelX = p.panelRef?.current ? G.PANELS.get(p.panelRef.current) : undefined;
-		thisFmm.current = panelX ? panelX.createMinimap(fmcp) : Fmm.createMinimap(fmcp, p.parentRef?.current as HTMLDivElement);
+		thisFmm.current = panelX ? panelX.createMinimap(fmcp) : Fmm.createMinimap(fmcp);
 		if (!thisFmm.current) return () => { /**/ };
 		thisMinimap.current = {
 			destructor: () => thisFmm.current?.destructor(),
@@ -204,12 +206,13 @@ export const useFmmReactMinimap = (key: string, form: React.RefObject<HTMLFormEl
 // =================================================================================================================================
 export const useFmmReactPanel = (
 	hostRef: React.RefObject<HTMLDivElement>,
+	minimapsCount: number,
 	detailParentRef?: React.RefObject<HTMLDivElement>,
 	vertical?: boolean
 ): React.RefObject<FmmReactPanel> => {
 	const thisPanel = React.useRef<FmmReactPanel | null>(null);
 	useOnceAfterFirstRender(() => {
-		const panel = Fmm.createPanel(hostRef.current as HTMLDivElement, detailParentRef?.current as HTMLDivElement, vertical, undefined);
+		const panel = Fmm.createPanel(hostRef.current as HTMLDivElement, minimapsCount, detailParentRef?.current as HTMLDivElement, vertical, undefined);
 		thisPanel.current = {
 			destroyDetached: () => panel.destroyDetached()
 		};

@@ -80,13 +80,13 @@ export const AppReact = (): JSX.Element => {
 					Detail view can shown in the panel or <input type='checkbox' onChange={(ev) => {setPanelDetail(ev.target.checked); destroyDetached()}}/>
 						floated per minimap.
 				</div>
+				<FmmReactPanelTag ref={thisPanel} minimapsCount={titles.length} detailParentRef={thisDetail} />
+				<div ref={thisDetail} className='detail' style={{ display: `${popupDetail? 'none': 'block'}` }}></div>
 				<div className='anchors'>
 					<div className={`${step === 0 ? 'active' : ''}`} ref={thisAnchors[0]}></div>
 					<div className={`${step === 1 ? 'active' : ''}`} ref={thisAnchors[1]}></div>
 					<div className={`${step === 2 ? 'active' : ''}`} ref={thisAnchors[2]}></div>
 				</div>
-				<FmmReactPanelTag ref={thisPanel} detailParentRef={thisDetail} />
-				<div ref={thisDetail} className='detail' style={{ display: `${popupDetail? 'none': 'block'}` }}></div>
 				<div style={{ clear: 'both' }}></div>
 			</div>
 			{step === 0 ? (
@@ -330,6 +330,7 @@ const FormikRB4: React.FC<FormProps> = ({ anchorRef, mkey, pageRef, panelRef, ti
 							framework={FmmBootstrap4}
 							key={mkey}
 							onUpdate={() => ea.onUpdate()}
+							ordinal={parseInt(mkey)}
 							pageRef={pageRef}
 							panelRef={mkey.endsWith('truetrue')? undefined: panelRef}
 							storeRef={thisFmmStore}
@@ -602,6 +603,7 @@ const ReactFinalMUI: React.FC<FormProps> = ({ anchorRef, mkey, pageRef, panelRef
 				framework={FmmMaterialUI}
 				key={mkey}
 				onUpdate={ea.fOnUpdate}
+				ordinal={parseInt(mkey)}
 				pageRef={pageRef}
 				panelRef={panelRef}
 				storeRef={thisFmmStore}
@@ -892,6 +894,7 @@ const UncontrolledB4: React.FC<FormProps> = ({ anchorRef, mkey, pageRef, panelRe
 		customElementIds: ea.customElementIds,
 		framework: FmmBootstrap4,
 		onUpdate: ea.fOnUpdate,
+		ordinal: parseInt(mkey),
 		pageRef,
 		panelRef,
 		title,

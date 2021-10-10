@@ -19,19 +19,17 @@ M           import { FmmReactMinimapTag } from '@eafmm/react';
   P         import { FmmReactMinimapTag, FmmReactPanelTag } from '@eafmm/react';
 
             function App() {
-M               var parentRef = React.useRef();
-  P             var anchorRef = React.useRef();
+M P             var anchorRef = React.useRef();
   P             var panelRef = React.useRef();
 M               var css = '.fmm-frame { height: 50px; }';
   P             var css = '.fmm-frame { height: 50px; } .fmm-panel { height: 0; }';
                 return (
                     <div className="App">
 M P                     <style>{css}</style>
-M                       <div ref={parentRef} style={{width:'70px', height:'50px', marginLeft:'200px'}}></div>
-  P                     <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
+M P                     <div ref={anchorRef} style={{width:'20px', height:'20px', marginLeft:'200px'}}></div>
   P                     <FmmReactPanelTag ref={panelRef}/>
                         <form>
-M                           <FmmReactMinimapTag parentRef={parentRef} title='Title'/>
+M                           <FmmReactMinimapTag anchorRef={anchorRef} title='Title'/>
   P                         <FmmReactMinimapTag anchorRef={anchorRef} panelRef={panelRef} title='Title'/>
                             <input id="Input1"/><br/>
                             <input id="Input2"/><br/>
@@ -59,7 +57,7 @@ Adapter for [FmmMinimap](https://www.npmjs.com/package/@eafmm/core#fmmminimap) r
 ## FmmReactMinimapTag
 Component to create and manage a [FmmReactMinimap](#fmmreactminimap).
 The minimap is detached when this component is destroyed.
-For minimaps in a panel, use the panelRef property; otherwise use the parentRef property to show an always-visible minimap, or anchorRef for a popup minimap.
+For minimaps in a panel, use the panelRef property; otherwise use the anchorRef for a popup minimap.
 
 Property | Type | Required
 --- | --- | :---:
@@ -70,9 +68,9 @@ Property | Type | Required
 [dynamicLabels](https://www.npmjs.com/package/@eafmm/core#mcp-dynamiclabels) | string[]
 [framework](https://www.npmjs.com/package/@eafmm/core#mcp-framework) | [FmmFramework](https://www.npmjs.com/package/@eafmm/core#fmmframework)
 [onUpdate](https://www.npmjs.com/package/@eafmm/core#mcp-onupdate) | [FmmOnUpdate](https://www.npmjs.com/package/@eafmm/core#fmmonupdate)
+[ordinal](https://www.npmjs.com/package/@eafmm/core#pcm-ordina=l) | number
 [pageRef](https://www.npmjs.com/package/@eafmm/core#fmmform-page) | React.RefObject\<HTMLElement\>
 panelRef | React.RefObject\<[FmmReactPanel](#fmmreactpanelt)\>
-[parentRef](https://www.npmjs.com/package/@eafmm/core#pcm-parent) | React.RefObject\<HTMLElement\>
 [storeRef](https://www.npmjs.com/package/@eafmm/core#mcp-store) | React.RefObject\<[FmmStore](https://www.npmjs.com/package/@eafmm/core#fmmstore)\>
 [title](https://www.npmjs.com/package/@eafmm/core#mcp-title) | string | &check;
 [usePanelDetail](https://www.npmjs.com/package/@eafmm/core#mcp-usepaneldetail) | boolean
@@ -105,6 +103,7 @@ Component to create and manage a [FmmReactPanel](#fmmreactpanel).
 Property | Type | Required
 --- | --- | :---:
 [detailParentRef](https://www.npmjs.com/package/@eafmm/core#pcp-detailparent) | React.RefObject\<HTMLDivElement\>
+[minimapsCount](https://www.npmjs.com/package/@eafmm/core#pcp-minimapsCount) | number
 [vertical](https://www.npmjs.com/package/@eafmm/core#pcp-vertical) | boolean
 
 ***
@@ -114,6 +113,7 @@ Hook version of [FmmReactPanelTag](#fmmreactpaneltag) that returns a [FmmReactPa
 Parameter | Type | Required
 --- | --- | :---:
 [hostRef](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | string | &check;
+[minimapsCount](https://www.npmjs.com/package/@eafmm/core#pcp-minimapscount) | number
 [detailParentRef](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | React.RefObject\<HTMLDivElement\>
 [vertical](https://www.npmjs.com/package/@eafmm/core#fmmcreatepanel) | boolean
 
