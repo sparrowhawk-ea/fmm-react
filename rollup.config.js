@@ -9,7 +9,7 @@ export default [
   {
     input: 'src/index.ts',
     external: ['react'],
-    plugins: [replace({'process.env.NODE_ENV': true}), esbuild({minify: true}), nodeResolve(), commonjs()],
+    plugins: [replace({preventAssignment: true, 'process.env.NODE_ENV': true}), esbuild({minify: true}), nodeResolve(), commonjs()],
     output: [
       {
         esModule: false,
@@ -36,7 +36,7 @@ export default [
   {
     input: 'src/demo.tsx',
     external: ['react'],
-    plugins: [replace({'process.env.NODE_ENV': true}), css(), esbuild({minify: true}), nodeResolve(), commonjs()],
+    plugins: [replace({preventAssignment: true, 'process.env.NODE_ENV': true}), css(), esbuild({minify: true}), nodeResolve(), commonjs()],
     output: [
       {
         esModule: false,

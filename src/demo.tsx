@@ -593,7 +593,7 @@ const ReactFinalMUI: React.FC<FormProps> = ({ anchorRef, mkey, pageRef, panelRef
 	return (
 		<RFForm initialValues={Ea.initialValues} mutators={{...arrayMutators}} onSubmit={(_: Earthsea) => {/**/}} validate={validate}>
 			{({ errors, form, handleSubmit, values }) => (
-		<form noValidate onSubmit={handleSubmit}>
+		<form noValidate onSubmit={e => { handleSubmit(e)?.catch(form.reset); }}>
 			<style>{style}</style>
 			<FmmReactStoreTag errors={errors} values={values} ref={thisFmmStore} />
 			<FmmReactMinimapTag

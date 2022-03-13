@@ -42,7 +42,7 @@ declare const useFmmReactMinimap: (key: string, form: React.RefObject<HTMLFormEl
 declare const useFmmReactPanel: (hostRef: React.RefObject<HTMLDivElement>, minimapsCount: number, detailParentRef?: React.RefObject<HTMLDivElement> | undefined, vertical?: boolean | undefined) => React.RefObject<FmmReactPanel>;
 declare const useFmmReactStore: <TV extends FmmStoreValues, TE extends FmmStoreErrors>(values: TV, errors?: TE | undefined) => React.RefObject<FmmStore>;
 declare const useOnceAfterFirstRender: (fn: () => void) => void;
-declare const useSetRef: <T extends unknown>(ref: ((instance: T | null) => void) | React.ForwardedRef<T>, value: React.RefObject<T>) => void;
+declare const useSetRef: <T>(ref: ((instance: T | null) => void) | React.ForwardedRef<T>, value: React.RefObject<T>) => void;
 
 declare const FmmMaterialUI: FmmFramework;
 

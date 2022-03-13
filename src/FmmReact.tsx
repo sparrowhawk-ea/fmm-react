@@ -247,7 +247,7 @@ export const useOnceAfterFirstRender = (fn: () => void): void =>
 // =================================================================================================================================
 //						U S E S E T R E F
 // =================================================================================================================================
-export const useSetRef = <T extends unknown>(
+export const useSetRef = <T,>(
 	ref: React.RefCallback<T> | React.ForwardedRef<T>,
 	value: React.RefObject<T>
 ): void =>
